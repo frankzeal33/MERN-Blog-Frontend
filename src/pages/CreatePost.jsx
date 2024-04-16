@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import { UserContext } from "../context/userContext";
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
+import Loader from '../Loader';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('')
@@ -11,6 +12,7 @@ const CreatePost = () => {
   const [description, setDescription] = useState('')
   const [thumbnail, setThumbnail] = useState('')
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
 
@@ -45,6 +47,7 @@ const POST_CATEGORIES = ["Agriculture", "Business", "Education", "Entertainment"
   
   const createPost = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
 
     const postData = new FormData();
     postData.set('title', title)
@@ -60,6 +63,11 @@ const POST_CATEGORIES = ["Agriculture", "Business", "Education", "Entertainment"
     } catch (err) {
       setError(err.response.data.message)
     }
+    setIsLoading(false)
+  }
+
+  if(isLoading){
+      return <Loader/>
   }
 
 return (
