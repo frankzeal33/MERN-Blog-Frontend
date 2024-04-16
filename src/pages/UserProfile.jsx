@@ -4,6 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 import axios from 'axios';
+import Loader from '../Loader';
 
 const UserProfile = () => {
   const [avatar, setAvatar] = useState('')
@@ -13,6 +14,7 @@ const UserProfile = () => {
   const [newPassword, setNewPassword] = useState('')
   const [confirmNewPassword, setConfirmNewPassword] = useState('')
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const [isAvatarTouched, setIsAvatarTouched] = useState(false)
 
@@ -50,6 +52,7 @@ const UserProfile = () => {
 
   const changeAvatarHandler = async () => {
     setIsAvatarTouched(false)
+    setIsLoading(true)
     try {
       const postData = new FormData();
       postData.set('avatar', avatar)
@@ -58,10 +61,12 @@ const UserProfile = () => {
     } catch (error) {
       console.log(error)
     }
+    setIsLoading(false)
   }
 
   const updateUserDetail = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
 
     try {
       const userData = new FormData()
@@ -80,7 +85,12 @@ const UserProfile = () => {
     } catch (err) {
       setError(err.response.data.message)
     }
+    setIsLoading(false)
 
+  }
+
+  if(isLoading){
+      return <Loader/>
   }
 
   return (
