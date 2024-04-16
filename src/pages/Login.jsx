@@ -2,12 +2,14 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { UserContext } from '../context/userContext';
+import Loader from '../Loader';
 
 const Login = () => {
   const [userData, setUserData] = useState({
     email: '',
     password: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState("")
   const navigate = useNavigate()
 
@@ -21,6 +23,7 @@ const Login = () => {
 
   const loginUser = async (e) => {
     e.preventDefault();
+    setIsLoading(true)
     setError('')
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/login`, userData)
@@ -30,6 +33,7 @@ const Login = () => {
     } catch (err) {
       setError(err.response.data.message)
     }
+    setIsLoading(false)
   }
 
   return (
