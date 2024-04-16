@@ -2,7 +2,7 @@ import { useState, useContext } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from "axios";
 import { UserContext } from '../context/userContext';
-import Loader from '../Loader';
+import Loader from '../components/Loader';
 
 const Login = () => {
   const [userData, setUserData] = useState({
