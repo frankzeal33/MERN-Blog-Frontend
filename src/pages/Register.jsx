@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import Loader from '../Loader';
+import Loader from '../components/Loader';
 
 const Register = () => {
   const [userData, setUserData] = useState({
