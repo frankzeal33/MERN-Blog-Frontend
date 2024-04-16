@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import { UserContext } from "../context/userContext";
 import {useNavigate} from "react-router-dom"
 import axios from "axios";
-import Loader from '../Loader';
+import Loader from '../components/Loader';
 
 const CreatePost = () => {
   const [title, setTitle] = useState('')
