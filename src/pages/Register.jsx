@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import Loader from '../Loader';
 
 const Register = () => {
   const [userData, setUserData] = useState({
@@ -9,6 +10,7 @@ const Register = () => {
     password: '',
     password2: ''
   })
+  const [isLoading, setIsLoading] = useState(false)
   const [error, setError] = useState('')
   const navigate = useNavigate()
 
@@ -20,6 +22,7 @@ const Register = () => {
 
   const registerUser = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
     setError('')
     try {
       const response = await axios.post(`${process.env.REACT_APP_BASE_URL}/users/register`, userData)
@@ -32,8 +35,13 @@ const Register = () => {
     } catch (err) {
       setError(err.response.data.message)
     }
+    setIsLoading(false)
   }
 
+  if(isLoading){
+      return <Loader/>
+  }
+  
   return (
     <section className="register">
       <div className="container">
