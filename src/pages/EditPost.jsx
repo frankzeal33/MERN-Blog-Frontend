@@ -4,7 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 import axios from "axios";
-import Loader from '../Loader';
+import Loader from '../components/Loader';
 
 const EditPost = () => {
   const [title, setTitle] = useState('')
