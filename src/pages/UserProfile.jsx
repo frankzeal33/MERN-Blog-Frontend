@@ -4,7 +4,7 @@ import { useState, useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 import axios from 'axios';
-import Loader from '../Loader';
+import Loader from '../components/Loader';
 
 const UserProfile = () => {
   const [avatar, setAvatar] = useState('')
