@@ -4,6 +4,7 @@ import 'react-quill/dist/quill.snow.css'
 import { useNavigate, useParams } from 'react-router-dom';
 import { UserContext } from "../context/userContext";
 import axios from "axios";
+import Loader from '../Loader';
 
 const EditPost = () => {
   const [title, setTitle] = useState('')
@@ -11,6 +12,7 @@ const EditPost = () => {
   const [description, setDescription] = useState('')
   const [thumbnail, setThumbnail] = useState('')
   const [error, setError] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
 
   const navigate = useNavigate()
   const {id} = useParams()
@@ -61,6 +63,7 @@ const POST_CATEGORIES = ["Agriculture", "Business", "Education", "Entertainment"
 
   const editPost = async (e) => {
     e.preventDefault()
+    setIsLoading(true)
 
     const postData = new FormData();
     postData.set('title', title)
@@ -76,7 +79,12 @@ const POST_CATEGORIES = ["Agriculture", "Business", "Education", "Entertainment"
     } catch (err) {
       setError(err.response.data.message)
     }
+    setIsLoading(false)
   } 
+
+  if(isLoading){
+      return <Loader/>
+  }
 
 return (
     <section className="create-post">
