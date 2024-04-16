@@ -36,6 +36,10 @@ const Login = () => {
     setIsLoading(false)
   }
 
+  if(isLoading){
+      return <Loader/>
+  }
+
   return (
     <section className="login">
       <div className="container">
